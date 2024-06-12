@@ -14,6 +14,6 @@ public class EmployeesController {
     private EmployeeRepository repository;
     @GetMapping
     public ResponseEntity getAllEmployees(){
-        return  ResponseEntity.ok("deu okk");
+        return  ResponseEntity.ok("deu okkk");
     }
 }
