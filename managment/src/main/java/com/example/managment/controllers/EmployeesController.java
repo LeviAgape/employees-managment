@@ -18,7 +18,7 @@ public class EmployeesController {
         return  ResponseEntity.ok(allEmployees);
     }
 
-    //TODO
+    //TOD
     @PostMapping
     public ResponseEntity registerEmployee(@RequestBody RequestEmployee data){
         Employee newEmployee = new Employee(data);
