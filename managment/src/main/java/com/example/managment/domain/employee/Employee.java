@@ -3,6 +3,8 @@ package com.example.managment.domain.employee;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.UUID;
+
 @Table(name="employee")
 @Entity(name="employee")
 @EqualsAndHashCode(of = "id")
@@ -11,8 +13,8 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Employee {
-    @Id @GeneratedValue(strategy = GenerationType.UUID)
-    private String id;
+    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    private UUID id;
 
     private String name;
 
