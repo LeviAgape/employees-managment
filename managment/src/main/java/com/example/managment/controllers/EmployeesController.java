@@ -18,11 +18,21 @@ public class EmployeesController {
         return  ResponseEntity.ok(allEmployees);
     }
 
-    //TOD
     @PostMapping
     public ResponseEntity registerEmployee(@RequestBody RequestEmployee data){
+
         Employee newEmployee = new Employee(data);
         repository.save(newEmployee);
         return ResponseEntity.ok().build();
+    }
+
+    @PutMapping
+    public ResponseEntity updateEmployee(@RequestBody RequestEmployee data){
+        Employee employee = repository.getReferenceById(data.id());
+        employee.setName(data.name());
+        employee.setBorn(data.born());
+        employee.setSalary(data.salary());
+        employee.setRole(data.role());
+        return ResponseEntity.ok(employee);
     }
 }

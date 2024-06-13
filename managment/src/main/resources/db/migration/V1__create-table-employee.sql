@@ -1,7 +1,7 @@
 CREATE TABLE employee(
-    id UUID PRIMARY KEY,
+    id TEXT PRIMARY KEY UNIQUE NOT NULL,
     name TEXT NOT NULL,
-    born INTEGER NOT NULL,
-    salary INTEGER NOT NULL,
+    born INT NOT NULL,
+    salary INT NOT NULL,
     role TEXT NOT NULL
 );
