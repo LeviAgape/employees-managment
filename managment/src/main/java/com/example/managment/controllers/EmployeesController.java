@@ -18,9 +18,10 @@ public class EmployeesController {
         return  ResponseEntity.ok(allEmployees);
     }
 
+    //TOD
     @PostMapping
     public ResponseEntity registerEmployee(@RequestBody RequestEmployee data){
-        Employee newEmployee= new Employee(data);
+        Employee newEmployee = new Employee(data);
         repository.save(newEmployee);
         return ResponseEntity.ok().build();
     }
