@@ -21,4 +21,11 @@ public class Employee {
     private Integer salary;
 
     private String role;
+
+    public Employee(RequestEmployee requestEmployee){
+        this.name = requestEmployee.name();
+        this.born = requestEmployee.born();
+        this.salary = requestEmployee.salary();
+        this.role = requestEmployee.role();
+    }
 }
