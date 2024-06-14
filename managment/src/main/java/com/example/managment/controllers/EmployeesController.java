@@ -47,6 +47,7 @@ public class EmployeesController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity deleteEmployee(@PathVariable String id){
+        Optional<Employee> optionalEmployee = repository.findById(id);
         repository.deleteById(id);
         return ResponseEntity.noContent().build();
     }

@@ -14,7 +14,10 @@ public record RequestEmployee(
 
         Integer salary,
 
-        String role) {
+        String role,
+
+        Boolean active
+        ) {
 
     public RequestEmployee{
         if (name == null || name.isBlank()){
