@@ -10,5 +10,7 @@ public interface EmployeeRepository extends JpaRepository<Employee, String> {
     List<Employee> findAllByOrderByNomeAsc();
     @Query("SELECT SUM(e.salario) FROM employee e")
     Integer sumOfAllSalaries();
+    @Query("SELECT e.funcao, e FROM employee e ORDER BY e.funcao, e.nome")
+    List<Object[]> findAllGroupedByFuncao();
 
 }

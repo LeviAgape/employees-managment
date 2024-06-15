@@ -17,7 +17,6 @@ import java.util.Optional;
 public class EmployeesController {
     @Autowired
     private EmployeeRepository repository;
-    private EmployeeService employeeService;
     @GetMapping
     public ResponseEntity getAllEmployees(){
         var allEmployees = repository.findAll();
@@ -38,6 +37,12 @@ public class EmployeesController {
     public ResponseEntity getSalary(){
         var employeesSalary = repository.sumOfAllSalaries();
         return ResponseEntity.ok(employeesSalary);
+    }
+
+    @GetMapping("/separado-por-funcao")
+    public ResponseEntity getEmployeesGroupedByFuncao(){
+        var employeeFuncao = repository.findAllGroupedByFuncao();
+        return ResponseEntity.ok(employeeFuncao);
     }
 
     @PostMapping
@@ -62,6 +67,8 @@ public class EmployeesController {
             return ResponseEntity.notFound().build();
         }
     }
+
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity deleteEmployee(@PathVariable String id){
