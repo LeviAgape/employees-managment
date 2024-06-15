@@ -2,12 +2,14 @@ package com.example.managment.controllers;
 
 import com.example.managment.domain.employee.Employee;
 import com.example.managment.domain.employee.EmployeeRepository;
+import com.example.managment.domain.employee.EmployeeService;
 import com.example.managment.domain.employee.RequestEmployee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -15,15 +17,31 @@ import java.util.Optional;
 public class EmployeesController {
     @Autowired
     private EmployeeRepository repository;
+    private EmployeeService employeeService;
     @GetMapping
     public ResponseEntity getAllEmployees(){
         var allEmployees = repository.findAll();
+
         return  ResponseEntity.ok(allEmployees);
+    }
+
+    @GetMapping("/ordem/alfabetica")
+
+    public ResponseEntity getOrderName(){
+        var employeesOrderByName = repository.findAllByOrderByNomeAsc();
+
+        return  ResponseEntity.ok(employeesOrderByName);
+    }
+
+
+    @GetMapping("/salario")
+    public ResponseEntity getSalary(){
+        var employeesSalary = repository.sumOfAllSalaries();
+        return ResponseEntity.ok(employeesSalary);
     }
 
     @PostMapping
     public ResponseEntity registerEmployee(@RequestBody RequestEmployee data){
-
         Employee newEmployee = new Employee(data);
         repository.save(newEmployee);
         return ResponseEntity.ok().build();
@@ -35,10 +53,10 @@ public class EmployeesController {
         Optional<Employee> optionalEmployee = repository.findById(data.id());
         if (optionalEmployee.isPresent()){
             Employee employee = optionalEmployee.get();
-            employee.setName(data.name());
-            employee.setBorn(data.born());
-            employee.setSalary(data.salary());
-            employee.setRole(data.role());
+            employee.setNome(data.nome());
+            employee.setData_nascimento(data.data_nascimento());
+            employee.setSalario(data.salario());
+            employee.setFuncao(data.funcao());
             return ResponseEntity.ok(employee);
         } else {
             return ResponseEntity.notFound().build();

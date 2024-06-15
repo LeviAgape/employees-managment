@@ -3,27 +3,27 @@ package com.example.managment.domain.employee;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
+import java.sql.Date;
 import java.util.UUID;
 
 public record RequestEmployee(
         String id,
 
-        String name,
+        String nome,
 
-        Integer born,
+        Date data_nascimento,
 
-        Integer salary,
+        Float salario,
 
-        String role,
+        String funcao
 
-        Boolean active
         ) {
 
     public RequestEmployee{
-        if (name == null || name.isBlank()){
+        if (nome == null || nome.isBlank()){
             throw new IllegalArgumentException("name não pode ser nulo ou vazio");
         }
-        if (role == null || role.isBlank()){
+        if (funcao == null || funcao.isBlank()){
             throw new IllegalArgumentException("name não pode ser nulo");
         }
     }

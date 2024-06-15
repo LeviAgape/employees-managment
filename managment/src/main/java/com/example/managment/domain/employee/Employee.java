@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
+import java.sql.Date;
 import java.util.UUID;
 
 @Table(name="employee")
@@ -19,21 +20,21 @@ public class Employee {
     private String id;
 
 
-    private String name;
+    private String nome;
 
-    private Integer born;
+    private Date data_nascimento;
 
-    private Integer salary;
+    private Float salario;
 
-    private String role;
+    private String funcao;
 
 
     public Employee(RequestEmployee requestEmployee){
 
-        this.name = requestEmployee.name();
-        this.born = requestEmployee.born();
-        this.salary = requestEmployee.salary();
-        this.role = requestEmployee.role();
+        this.nome = requestEmployee.nome();
+        this.data_nascimento = requestEmployee.data_nascimento();
+        this.salario = requestEmployee.salario();
+        this.funcao = requestEmployee.funcao();
     }
 
 }
