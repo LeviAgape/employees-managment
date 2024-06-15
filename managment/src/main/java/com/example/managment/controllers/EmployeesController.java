@@ -1,9 +1,6 @@
 package com.example.managment.controllers;
 
-import com.example.managment.domain.employee.Employee;
-import com.example.managment.domain.employee.EmployeeRepository;
-import com.example.managment.domain.employee.EmployeeService;
-import com.example.managment.domain.employee.RequestEmployee;
+import com.example.managment.domain.employee.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,6 +14,8 @@ import java.util.Optional;
 public class EmployeesController {
     @Autowired
     private EmployeeRepository repository;
+    @Autowired
+    private EmployeeService employeeService;
     @GetMapping
     public ResponseEntity getAllEmployees(){
         var allEmployees = repository.findAll();
@@ -32,17 +31,10 @@ public class EmployeesController {
         return  ResponseEntity.ok(employeesOrderByName);
     }
 
-
-    @GetMapping("/salario")
-    public ResponseEntity getSalary(){
-        var employeesSalary = repository.sumOfAllSalaries();
-        return ResponseEntity.ok(employeesSalary);
-    }
-
     @GetMapping("/separado-por-funcao")
-    public ResponseEntity getEmployeesGroupedByFuncao(){
-        var employeeFuncao = repository.findAllGroupedByFuncao();
-        return ResponseEntity.ok(employeeFuncao);
+    public String getEmployeesGroupedByFuncao() {
+        List<Object[]> employeesGroupedByFuncao = employeeService.getEmployeesGroupedByFuncao();
+        return EmployeePrinter.getEmployeesGroupedByFuncaoAsJson(employeesGroupedByFuncao);
     }
 
     @PostMapping
@@ -50,6 +42,18 @@ public class EmployeesController {
         Employee newEmployee = new Employee(data);
         repository.save(newEmployee);
         return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/aumento/salarial")
+    public String applySalaryIncrease() {
+        employeeService.applySalaryIncrease();
+        return "Aumento salarial aplicado com sucesso!";
+    }
+
+    @PutMapping ("/salario")
+    public ResponseEntity getSalary(){
+        var employeesSalary = repository.sumOfAllSalaries();
+        return ResponseEntity.ok(employeesSalary);
     }
 
     @PutMapping
