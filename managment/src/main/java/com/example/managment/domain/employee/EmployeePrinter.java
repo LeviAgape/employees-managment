@@ -1,8 +1,8 @@
 package com.example.managment.domain.employee;
 
-import com.example.managment.domain.employee.Employee;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,7 +12,6 @@ import java.util.Map;
 public class EmployeePrinter {
 
     public static String getEmployeesGroupedByFuncaoAsJson(List<Object[]> employeesGroupedByFuncao) {
-
         Map<String, List<Employee>> groupedEmployees = new HashMap<>();
 
         for (Object[] result : employeesGroupedByFuncao) {
@@ -23,12 +22,11 @@ public class EmployeePrinter {
                 groupedEmployees.put(funcao, new ArrayList<>());
             }
 
-
             groupedEmployees.get(funcao).add(employee);
         }
 
-
         ObjectMapper mapper = new ObjectMapper();
+        mapper.registerModule(new JavaTimeModule());
         try {
             return mapper.writeValueAsString(groupedEmployees);
         } catch (JsonProcessingException e) {

@@ -6,7 +6,6 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
-import java.util.UUID;
 
 public interface EmployeeRepository extends JpaRepository<Employee, String> {
     List<Employee> findAllByOrderByNomeAsc();
@@ -18,4 +17,11 @@ public interface EmployeeRepository extends JpaRepository<Employee, String> {
     @Modifying
     @Query("UPDATE employee e SET e.salario = e.salario * 1.1")  // Aumento de 10%
     void applySalaryIncrease();
+    @Query("SELECT e FROM employee e WHERE EXTRACT(MONTH FROM e.data_nascimento) IN (10, 12)")
+    List<Employee> findBirthdayOctoberDecember();
+    @Query(value = "SELECT e FROM employee e ORDER BY e.data_nascimento ASC")
+    List<Employee> findAllOrderByDataNascimentoAsc();
+    @Query(value = "SELECT e.nome AS nome_funcionario, e.salario AS salario_funcionario, e.salario / 1212.0 AS salarios_minimos FROM employee e")
+    List<Object[]> calculateSalaryMinimum();
+
 }

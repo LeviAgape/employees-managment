@@ -1,19 +1,16 @@
 package com.example.managment.domain.employee;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-
-import java.sql.Date;
-import java.util.UUID;
+import java.math.BigDecimal;
+import java.time.LocalDate;
 
 public record RequestEmployee(
         String id,
 
         String nome,
 
-        Date data_nascimento,
+        LocalDate data_nascimento,
 
-        Float salario,
+        BigDecimal salario,
 
         String funcao
 

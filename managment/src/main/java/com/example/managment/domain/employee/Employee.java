@@ -1,12 +1,12 @@
 package com.example.managment.domain.employee;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+
 import lombok.*;
 
-import java.sql.Date;
-import java.util.UUID;
+import java.math.BigDecimal;
+import java.time.LocalDate;
 
 @Table(name="employee")
 @Entity(name="employee")
@@ -22,9 +22,10 @@ public class Employee {
 
     private String nome;
 
-    private Date data_nascimento;
+    private LocalDate data_nascimento;
 
-    private Float salario;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
+    private BigDecimal salario;
 
     private String funcao;
 

@@ -32,9 +32,33 @@ public class EmployeesController {
     }
 
     @GetMapping("/separado-por-funcao")
-    public String getEmployeesGroupedByFuncao() {
+    public ResponseEntity<String> getEmployeesGroupedByFuncao() {
         List<Object[]> employeesGroupedByFuncao = employeeService.getEmployeesGroupedByFuncao();
-        return EmployeePrinter.getEmployeesGroupedByFuncaoAsJson(employeesGroupedByFuncao);
+        return ResponseEntity.ok(EmployeePrinter.getEmployeesGroupedByFuncaoAsJson(employeesGroupedByFuncao));
+    }
+
+    @GetMapping("/nascidos/10/12")
+    public List<Employee> getBirthdayOctoberDecember() {
+        return employeeService.getBirthdayOctoberDecember();
+    }
+
+    @GetMapping("/mais/velho")
+    public ResponseEntity<Employee> getOldestEmployee() {
+        List<Employee> employees = repository.findAllOrderByDataNascimentoAsc();
+
+        if (employees.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        Employee oldestEmployee = employees.get(0);
+
+        return ResponseEntity.ok(oldestEmployee);
+    }
+
+    @GetMapping("salarios/minimos")
+    public ResponseEntity<List<Object[]>> getSalariosMinimos() {
+        List<Object[]> salariosMinimos = employeeService.getSalariosMinimos();
+        return ResponseEntity.ok(salariosMinimos);
     }
 
     @PostMapping
