@@ -1,0 +1,1 @@
+This Rest API has the function of controlling employees within a company. Being able to add, edit, delete and display a list of employees. May increase salary increases, older employees and various features
