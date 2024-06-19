@@ -43,7 +43,7 @@ public class EmployeesController {
         return  ResponseEntity.ok(employeesOrderByName);
     }
 
-    @GetMapping("/separado/por/funcao")
+    @GetMapping(value = "/separado/por/funcao", produces = "application/json")
     public ResponseEntity<String> getEmployeesGroupedByFuncao() {
         List<Object[]> employeesGroupedByFuncao = employeeService.getEmployeesGroupedByFuncao();
         return ResponseEntity.ok(EmployeePrinter.getEmployeesGroupedByFuncao(employeesGroupedByFuncao));
