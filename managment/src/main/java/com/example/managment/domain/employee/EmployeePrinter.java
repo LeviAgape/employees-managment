@@ -11,7 +11,7 @@ import java.util.Map;
 
 public class EmployeePrinter {
 
-    public static String getEmployeesGroupedByFuncaoAsJson(List<Object[]> employeesGroupedByFuncao) {
+    public static String getEmployeesGroupedByFuncao(List<Object[]> employeesGroupedByFuncao) {
         Map<String, List<Employee>> groupedEmployees = new HashMap<>();
 
         for (Object[] result : employeesGroupedByFuncao) {

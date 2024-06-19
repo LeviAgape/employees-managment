@@ -31,10 +31,10 @@ public class EmployeesController {
         return  ResponseEntity.ok(employeesOrderByName);
     }
 
-    @GetMapping("/separado-por-funcao")
+    @GetMapping("/separado/por/funcao")
     public ResponseEntity<String> getEmployeesGroupedByFuncao() {
         List<Object[]> employeesGroupedByFuncao = employeeService.getEmployeesGroupedByFuncao();
-        return ResponseEntity.ok(EmployeePrinter.getEmployeesGroupedByFuncaoAsJson(employeesGroupedByFuncao));
+        return ResponseEntity.ok(EmployeePrinter.getEmployeesGroupedByFuncao(employeesGroupedByFuncao));
     }
 
     @GetMapping("/nascidos/10/12")

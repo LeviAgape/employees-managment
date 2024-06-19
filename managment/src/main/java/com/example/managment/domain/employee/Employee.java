@@ -22,9 +22,9 @@ public class Employee {
 
     private String nome;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     private LocalDate data_nascimento;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     private BigDecimal salario;
 
     private String funcao;
