@@ -1,3 +1,28 @@
 # Default ignored files
 /shelf/
 /workspace.xml
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+# Maven
+target/
+.mvn/
+
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+
+# Arquivos temporários
+*.tmp
+*.temp
+*.swp
+
+# Arquivos de backup
+*.bak
+*.orig
